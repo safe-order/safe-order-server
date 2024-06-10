@@ -1,0 +1,19 @@
+spring:
+  datasource:
+    driver-class-name: org.mariadb.jdbc.Driver
+    url: jdbc:mariadb://${MARIADB_URL}/${MARIADB_NAME}?serverTimezone=Asia/Seoul&characterEncoding=UTF-8
+    username: ${MARIADB_USERNAME}
+    password: ${MARIADB_PASSWORD}
+
+  jpa:
+    database:
+    hibernate:
+      ddl-auto: update
+    open-in-view: false
+
+server:
+  port: 8080
+  servlet:
+    encoding:
+      charset: UTF-8
+      force: true
