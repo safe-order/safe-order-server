@@ -1,20 +1,12 @@
 package kr.yz.safeorder.domain.order
 
-import io.viascom.nanoid.NanoId
 import jakarta.persistence.*
-import kr.yz.safeorder.domain.item.ItemEntity
-import kr.yz.safeorder.domain.transaction.TransactionEntity
 
 @Entity
-open class OrderEntity(
+@Table(name = "`order`")
+data class OrderEntity(
     @Id
-    val id: String = NanoId.generate(12),
-    @OneToOne
-    @JoinColumn(name = "item_id")
-    val item: ItemEntity,
-    @ManyToOne
-    @JoinColumn(name = "transaction_id")
-    val transaction: TransactionEntity,
+    val id: String,
     @Column(name = "month", nullable = false)
     val month: String,
     @Column(name = "date_time", nullable = false)
