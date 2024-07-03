@@ -6,4 +6,6 @@ import org.springframework.data.repository.CrudRepository
 interface UserRepository: CrudRepository<UserEntity, String> {
     override fun existsById(id: String): Boolean
     fun existsByBusinessNumber(businessCode: String): Boolean
+    fun existsByBrandName(brandName: String): Boolean
+    fun existsByCompanyName(companyName: String): Boolean
 }

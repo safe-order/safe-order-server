@@ -10,6 +10,8 @@ enum class UserErrorCode(
 ) : CustomErrorProperty {
     EXIST_USER_ID_EXCEPTION(409, "아이디가 이미 존재합니다."),
     EXIST_BUSINESS_NUMBER_EXCEPTION(409, "사업자 번호가 이미 존재합니다."),
+    EXIST_BRAND_NAME_EXCEPTION(409, "브랜드명이 이미 존재합니다."),
+    EXIST_COMPANY_NAME(409, "본사명이 이미 존재합니다."),
     INVALID_PASSWORD_EXCEPTION(409, "유효하지 않는 비밀번호입니다."),
     NOT_EXIST_ID(409, "존재하지 않는 아이디입니다."),
     ;

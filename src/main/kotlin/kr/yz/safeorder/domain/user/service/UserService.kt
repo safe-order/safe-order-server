@@ -5,12 +5,9 @@ import kr.yz.safeorder.domain.user.UserEntity
 import kr.yz.safeorder.domain.user.controller.dto.UserLoginResponseDto
 import kr.yz.safeorder.domain.user.controller.dto.UserSignupRequestDto
 import kr.yz.safeorder.domain.user.controller.dto.toUserLoginResponseDto
+import kr.yz.safeorder.domain.user.error.exception.*
 import kr.yz.safeorder.domain.user.repository.UserRepository
 import kr.yz.safeorder.global.dto.StatusDto
-import kr.yz.safeorder.domain.user.error.exception.ExistBusinessNumberException
-import kr.yz.safeorder.domain.user.error.exception.ExistIdException
-import kr.yz.safeorder.domain.user.error.exception.InvalidPasswordException
-import kr.yz.safeorder.domain.user.error.exception.NotExistUserIdException
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.stereotype.Service
@@ -65,6 +62,18 @@ class UserService(
     fun checkValidBusinessNumber(businessNumber: String): StatusDto {
         if (userRepository.existsByBusinessNumber(businessNumber))
             throw ExistBusinessNumberException // 이미 존재하는 사업자 번호
+        return StatusDto("OK", 200)
+    }
+
+    fun checkValidBrandName(brandName: String): StatusDto {
+        if ( userRepository.existsByBrandName(brandName))
+            throw ExistBrandNameException // 이미 존재하는 브랜드명
+        return StatusDto("OK", 200)
+    }
+
+    fun checkValidCompanyName(companyName: String): StatusDto {
+        if ( userRepository.existsByCompanyName(companyName))
+            throw ExistCompanyNameException // 이미 존재하는 본사명
         return StatusDto("OK", 200)
     }
 }

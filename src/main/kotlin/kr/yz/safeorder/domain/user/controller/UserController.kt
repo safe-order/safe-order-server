@@ -26,8 +26,18 @@ class UserController(
         return userService.checkValidBusinessNumber(businessNumber)
     }
 
-    @GetMapping("valid/id")
+    @GetMapping("/valid/id")
     fun checkValidId(@RequestParam id: String): StatusDto {
         return userService.checkValidId(id)
+    }
+
+    @GetMapping("/valid/brand")
+    fun checkValidBrandName(@RequestParam brandName: String): StatusDto {
+        return userService.checkValidBrandName(brandName)
+    }
+
+    @GetMapping("/valid/company")
+    fun checkValidCompanyName(@RequestParam companyName: String): StatusDto {
+        return userService.checkValidCompanyName(companyName)
     }
 }
