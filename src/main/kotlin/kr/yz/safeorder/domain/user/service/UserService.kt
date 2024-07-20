@@ -38,7 +38,7 @@ class UserService(
             detailedAddress = signupDto.detailedAddress,
             businessNumber = signupDto.businessNumber,
             businessRegistrationUrl = signupDto.businessRegistrationUrl,
-            back = signupDto.back,
+            back = signupDto.bank,
             bankNumber = signupDto.bankNumber,
             userType = signupDto.userType,
             code = NanoId.generate(12, "1234567890")

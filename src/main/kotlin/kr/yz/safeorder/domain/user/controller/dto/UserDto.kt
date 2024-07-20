@@ -14,11 +14,10 @@ data class UserLoginResponseDto(
     val detailedAddress: String, // 상세 주소
     val businessNumber: String, // 사업자 번호
     val businessRegistrationUrl: String, // 사업자 등록증 URL
-    val back: String, // 은행
+    val bank: String, // 은행
     val bankNumber: String, // 계좌번호
     val userType: UserType // 유저 타입
 )
-
 
 data class UserSignupRequestDto(
     val id: String, // 아이디
@@ -32,7 +31,7 @@ data class UserSignupRequestDto(
     val detailedAddress: String, // 상세 주소
     val businessNumber: String, // 사업자 번호
     val businessRegistrationUrl: String, // 사업자 등록증 URL
-    val back: String, // 은행
+    val bank: String, // 은행
     val bankNumber: String, // 계좌번호
     val userType: UserType // 유저 타입
 )
@@ -49,7 +48,7 @@ fun UserEntity.toUserLoginResponseDto(): UserLoginResponseDto {
         detailedAddress = this.detailedAddress,
         businessNumber = this.businessNumber,
         businessRegistrationUrl = this.businessRegistrationUrl,
-        back = this.back,
+        bank = this.back,
         bankNumber = this.bankNumber,
         userType = this.userType
     )
