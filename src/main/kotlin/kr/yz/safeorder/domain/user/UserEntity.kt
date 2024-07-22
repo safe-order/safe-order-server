@@ -31,7 +31,7 @@ data class UserEntity(
     @Column(name ="business_registration_url", nullable = false, unique = true)
     val businessRegistrationUrl: String, // 사업자 등록증 URL
     @Column(name = "bank", nullable = false)
-    val back: String, // 은행
+    val bank: String, // 은행
     @Column(name = "bank_number", nullable = false)
     val bankNumber: String, // 계좌번호
     @Column(name = "user_type", nullable = false, updatable = false)

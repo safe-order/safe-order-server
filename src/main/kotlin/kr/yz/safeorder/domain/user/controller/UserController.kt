@@ -1,6 +1,7 @@
 package kr.yz.safeorder.domain.user.controller
 
 import kr.yz.safeorder.domain.user.controller.dto.UserLoginResponseDto
+import kr.yz.safeorder.domain.user.controller.dto.UserProfileDetailResponseDto
 import kr.yz.safeorder.domain.user.controller.dto.UserSignupRequestDto
 import kr.yz.safeorder.domain.user.service.UserService
 import kr.yz.safeorder.global.dto.StatusDto
@@ -39,5 +40,10 @@ class UserController(
     @GetMapping("/valid/company")
     fun checkValidCompanyName(@RequestParam companyName: String): StatusDto {
         return userService.checkValidCompanyName(companyName)
+    }
+
+    @GetMapping("/profile")
+    fun getUserProfile(@RequestParam id: String): UserProfileDetailResponseDto{
+        return userService.getUserProfile(id)
     }
 }

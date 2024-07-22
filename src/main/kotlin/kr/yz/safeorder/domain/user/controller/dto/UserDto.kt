@@ -36,6 +36,19 @@ data class UserSignupRequestDto(
     val userType: UserType // 유저 타입
 )
 
+data class UserProfileDetailResponseDto(
+    val id: String, // 아이디
+    val companyName: String, // 상호 or 본사 이름
+    val representativName: String?, // 대표자 이름
+    val representativPhone: String?, // 대표자 전화번호
+    val managerPhone: String?, // 담당자 전화번호
+    val brandName: String?, // 브랜드 이름
+    val address: String, // 주소
+    val detailedAddress: String, // 상세 주소
+    val bank: String, // 은행
+    val bankNumber: String, // 계좌번호
+)
+
 fun UserEntity.toUserLoginResponseDto(): UserLoginResponseDto {
     return UserLoginResponseDto(
         id = this.id,
@@ -48,7 +61,7 @@ fun UserEntity.toUserLoginResponseDto(): UserLoginResponseDto {
         detailedAddress = this.detailedAddress,
         businessNumber = this.businessNumber,
         businessRegistrationUrl = this.businessRegistrationUrl,
-        bank = this.back,
+        bank = this.bank,
         bankNumber = this.bankNumber,
         userType = this.userType
     )

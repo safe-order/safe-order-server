@@ -3,6 +3,7 @@ package kr.yz.safeorder.domain.user.service
 import io.viascom.nanoid.NanoId
 import kr.yz.safeorder.domain.user.UserEntity
 import kr.yz.safeorder.domain.user.controller.dto.UserLoginResponseDto
+import kr.yz.safeorder.domain.user.controller.dto.UserProfileDetailResponseDto
 import kr.yz.safeorder.domain.user.controller.dto.UserSignupRequestDto
 import kr.yz.safeorder.domain.user.controller.dto.toUserLoginResponseDto
 import kr.yz.safeorder.domain.user.error.exception.*
@@ -38,7 +39,7 @@ class UserService(
             detailedAddress = signupDto.detailedAddress,
             businessNumber = signupDto.businessNumber,
             businessRegistrationUrl = signupDto.businessRegistrationUrl,
-            back = signupDto.bank,
+            bank = signupDto.bank,
             bankNumber = signupDto.bankNumber,
             userType = signupDto.userType,
             code = NanoId.generate(12, "1234567890")
@@ -76,4 +77,22 @@ class UserService(
             throw ExistCompanyNameException // 이미 존재하는 본사명
         return StatusDto("OK", 200)
     }
+
+    fun getUserProfile(id: String): UserProfileDetailResponseDto {
+        val user = userRepository.findByIdOrNull(id) ?: throw NotExistUserIdException
+        return user.toUserProfileDetailResponseDto()
+    }
+
+    private fun UserEntity.toUserProfileDetailResponseDto(): UserProfileDetailResponseDto = UserProfileDetailResponseDto(
+        id = this.id,
+        companyName = this.companyName,
+        representativName = this.representativName,
+        representativPhone = this.representativPhone,
+        managerPhone = this.managerPhone,
+        brandName = this.brandName,
+        address = this.address,
+        detailedAddress = this.detailedAddress,
+        bank = this.bank,
+        bankNumber = this.bankNumber
+    )
 }
