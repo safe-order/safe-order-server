@@ -15,7 +15,7 @@ data class UserEntity(
     @Column(name = "created_at", nullable = false)
     val createdAt: String,
     @Column(name = "company_name", nullable = false)
-    val companyName: String, // 상호 or 본사 이름
+    var companyName: String, // 상호 or 본사 이름
     @Column(name = "representativ_name", nullable = true)
     val representativName: String? = null, // 대표자 이름
     @Column(name = "representativ_phone", nullable = true)
@@ -23,19 +23,19 @@ data class UserEntity(
     @Column(name = "manager_phone", nullable = true)
     val managerPhone: String? = null, // 담당자 전화번호
     @Column(name = "brandName", nullable = true)
-    val brandName: String? = null, // 브랜드 이름
+    var brandName: String? = null, // 브랜드 이름
     @Column(name = "address", nullable = false, unique = true)
-    val address: String, // 주소
+    var address: String, // 주소
     @Column(name = "detailed_address", nullable = false, unique = true)
-    val detailedAddress: String, // 상세 주소
+    var detailedAddress: String, // 상세 주소
     @Column(name = "business_number", nullable = false, unique = true)
-    val businessNumber: String, // 사업자 번호
+    var businessNumber: String, // 사업자 번호
     @Column(name ="business_registration_url", nullable = false, unique = true)
     val businessRegistrationUrl: String, // 사업자 등록증 URL
     @Column(name = "bank", nullable = false)
-    val bank: String, // 은행
+    var bank: String, // 은행
     @Column(name = "bank_number", nullable = false)
-    val bankNumber: String, // 계좌번호
+    var bankNumber: String, // 계좌번호
     @Column(name = "user_type", nullable = false, updatable = false)
     @Enumerated(EnumType.STRING)
     val userType: UserType // 유저 타입

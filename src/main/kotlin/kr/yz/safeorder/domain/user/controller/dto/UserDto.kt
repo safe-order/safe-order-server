@@ -68,3 +68,38 @@ fun UserEntity.toUserLoginResponseDto(): UserLoginResponseDto {
         userType = this.userType
     )
 }
+
+fun UserSignupRequestDto.toUserEntity(): UserEntity {
+    return UserEntity(
+        id = this.id,
+        password = this.password,
+        createdAt = this.createdAt,
+        companyName = this.companyName,
+        representativName = this.representativName,
+        representativPhone = this.representativPhone,
+        managerPhone = this.managerPhone,
+        brandName = this.brandName,
+        address = this.address,
+        detailedAddress = this.detailedAddress,
+        businessNumber = this.businessNumber,
+        businessRegistrationUrl = this.businessRegistrationUrl,
+        bank = this.bank,
+        bankNumber = this.bankNumber,
+        userType = this.userType,
+        code = NanoId.generate(12, "1234567890")
+    )
+}
+
+fun UserEntity.toUserProfileDetailResponseDto(): UserProfileDetailDto = UserProfileDetailDto(
+    id = this.id,
+    companyName = this.companyName,
+    representativName = this.representativName,
+    representativPhone = this.representativPhone,
+    managerPhone = this.managerPhone,
+    brandName = this.brandName,
+    address = this.address,
+    detailedAddress = this.detailedAddress,
+    bank = this.bank,
+    bankNumber = this.bankNumber,
+    businessNumber = this.businessNumber
+)

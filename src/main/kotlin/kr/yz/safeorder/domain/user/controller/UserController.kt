@@ -46,4 +46,10 @@ class UserController(
     fun getUserProfile(@RequestParam id: String): UserProfileDetailResponseDto{
         return userService.getUserProfile(id)
     }
+
+    // 유저 수정
+    @PatchMapping("/profile")
+    fun fixUsrProfile(@RequestBody userData: UserProfileDetailDto): UserProfileDetailDto {
+        return userService.fixUserProfile(userData)
+    }
 }

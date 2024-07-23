@@ -83,16 +83,20 @@ class UserService(
         return user.toUserProfileDetailResponseDto()
     }
 
-    private fun UserEntity.toUserProfileDetailResponseDto(): UserProfileDetailResponseDto = UserProfileDetailResponseDto(
-        id = this.id,
-        companyName = this.companyName,
-        representativName = this.representativName,
-        representativPhone = this.representativPhone,
-        managerPhone = this.managerPhone,
-        brandName = this.brandName,
-        address = this.address,
-        detailedAddress = this.detailedAddress,
-        bank = this.bank,
-        bankNumber = this.bankNumber
-    )
+    // 유저 수정
+    fun fixUserProfile(fixUserData: UserProfileDetailDto): UserProfileDetailDto {
+        val userData = userRepository.findByIdOrNull(fixUserData.id) ?: throw NotExistUserIdException
+        if (userData.userType != UserType.AGENCY) throw TODO("권한 없음")
+        with(userData) {
+            brandName = fixUserData.brandName
+            companyName = fixUserData.companyName
+            address = fixUserData.address
+            detailedAddress = fixUserData.detailedAddress
+            businessNumber = fixUserData.businessNumber
+            bank = fixUserData.bank
+            bankNumber = fixUserData.bankNumber
+        }
+
+        return userData.toUserProfileDetailResponseDto()
+    }
 }
