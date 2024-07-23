@@ -12,6 +12,8 @@ data class UserEntity(
     val id: String, // 아이디
     @Column(name = "password", nullable = false)
     var password: String, // 비밀번호
+    @Column(name = "created_at", nullable = false)
+    val createdAt: String,
     @Column(name = "company_name", nullable = false)
     val companyName: String, // 상호 or 본사 이름
     @Column(name = "representativ_name", nullable = true)

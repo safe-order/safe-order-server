@@ -2,6 +2,7 @@ package kr.yz.safeorder.domain.user.controller.dto
 
 import kr.yz.safeorder.domain.user.UserEntity
 import kr.yz.safeorder.domain.user.type.UserType
+import java.time.LocalDateTime
 
 data class UserLoginResponseDto(
     val id: String, // 아이디
@@ -22,6 +23,7 @@ data class UserLoginResponseDto(
 data class UserSignupRequestDto(
     val id: String, // 아이디
     var password: String, // 비밀번호
+    val createdAt: String = LocalDateTime.now().toString(),
     val companyName: String, // 상호 or 본사 이름
     val representativName: String? = null, // 대표자 이름
     val representativPhone: String? = null, // 대표자 전화번호
