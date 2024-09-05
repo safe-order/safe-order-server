@@ -1,0 +1,1 @@
+package kr.yz.safeorder.global.security.jwtimport org.springframework.boot.context.properties.ConfigurationProperties@ConfigurationProperties(prefix = "jwt")class JwtProperties(    val accessSecretKey: String,    val refreshSecretKey: String,    val accessExp: Long,    val refreshExp: Long)
