@@ -15,10 +15,17 @@ import org.springframework.security.web.SecurityFilterChain
 class SecurityConfig(
     private val objectMapper: ObjectMapper
 ) {
+
     @Bean
     fun securityFilterChain(http: HttpSecurity): SecurityFilterChain {
         http.csrf { csrf -> csrf.disable() }
             .authorizeHttpRequests { authorize ->
+                authorize.requestMatchers(
+                    "/swagger-ui/**",
+                    "v3/api-docs/**",
+                    "/swagger-resources/**",
+                    "/swagger-resources"
+                ).permitAll()
                 authorize.requestMatchers("/**").permitAll()
             }
         return http.build()
