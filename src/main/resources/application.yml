@@ -5,11 +5,28 @@ spring:
     username: ${MARIADB_USERNAME}
     password: ${MARIADB_PASSWORD}
 
+  application:
+    name: safe-order
+
+  data:
+    redis:
+      host: ${REDIS_HOST}
+      port: ${REDIS_PORT}
+      password: ${REDIS_PASSWORD}
+
   jpa:
     database:
     hibernate:
       ddl-auto: update
     open-in-view: false
+
+  servlet:
+    multipart:
+      enabled: true # 멀티파트 업로드 지원여부 (default: true)
+      file-size-threshold: 0B # 파일을 디스크에 저장하지 않고 메모리에 저장하는 최소 크기 (default: 0B)
+      #      location: /users/charming/temp # 업로드된 파일이 임시로 저장되는 디스크 위치 (default: WAS가 결정)
+      max-file-size: 10MB # 한개 파일의 최대 사이즈 (default: 1MB)
+      max-request-size: 10MB # 한개 요청의 최대 사이즈 (default: 10MB)
 
 server:
   port: 8080
@@ -17,3 +34,47 @@ server:
     encoding:
       charset: UTF-8
       force: true
+
+springdoc:
+  api-docs:
+    path: /api-docs # API 문서 생성 경로
+    groups:
+      enabled: true
+  swagger-ui:
+    path: /index.html # Swagger-ui 경로
+    enabled: true
+    groups-order: desc
+    tags-sorter: alpha
+    operations-sorter: alpha
+    display-request-duration: true
+    doc-expansion: none
+  cache:
+    disabled: true
+  override-with-generic-response: false
+  model-and-view-allowed: true
+  default-consumes-media-type: application/json
+  default-produces-media-type: application/json
+
+cloud:
+  aws:
+    region:
+      static: ${AWS_REGION}
+    s3:
+      bucket: ${BUCKET_NAME}
+    stack:
+      auto: false
+    credentials:
+      access-key: ${AWS_ACCESS}
+      secret-key: ${AWS_SECRET}
+
+cors:
+  originPatterns: ${ORIGIN_PATTERNS}
+
+jwt:
+  access-secret-key: ${ACCESS_SECRET_KEY}
+  refresh-secret-key: ${REFRESH_SECRET_KEY}
+  access-exp: ${ACCESS_EXP}
+  refresh-exp: ${REFRESH_EXP}
+
+api-key:
+  nts-businessman: ${NTS_BUSINESSMAN}
