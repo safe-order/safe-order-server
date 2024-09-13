@@ -4,8 +4,8 @@ import kr.yz.safeorder.domain.admin.FranchisorEnrollEntity
 import org.springframework.data.domain.Slice
 
 data class FranchisorEnrollDto(
-    val id: String,
-    val franchisor: String
+    val id: Long,
+    val franchisor: Long
 )
 
 fun Slice<FranchisorEnrollEntity>.toDto(): Slice<FranchisorEnrollDto> {

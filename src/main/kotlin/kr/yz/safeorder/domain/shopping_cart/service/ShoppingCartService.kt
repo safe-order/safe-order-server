@@ -21,7 +21,7 @@ class ShoppingCartService(
             throw TODO("존재하지 않는 제품")
         }
         val shoppingCartEntity = ShoppingCartEntity(
-            NanoId.generate(16),
+            0,
             productEntity,
             franchiseData
         )

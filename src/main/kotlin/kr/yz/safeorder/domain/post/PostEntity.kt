@@ -6,8 +6,8 @@ import jakarta.persistence.*
 @Table(name = "post")
 data class PostEntity(
     @Id
-    @Column(columnDefinition = "CHAR(16)")
-    val id: String,
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    val id: Long, // 아이디
     @Column(name = "title", columnDefinition = "VARCHAR(30)")
     val title: String,
     @Column(name = "detail", columnDefinition = "VARCHAR(500)")

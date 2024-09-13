@@ -10,8 +10,8 @@ import kr.yz.safeorder.domain.product.ProductEntity
 @Table(name = "`order`")
 data class OrderEntity(
     @Id
-    @Column(columnDefinition = "CHAR(16)")
-    val id: String,
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    val id: Long, // 아이디
     @Column(name = "date_time", nullable = false, columnDefinition = "DATETIME") // 주문 날짜
     val dateTime: String,
     @Column(name = "amount", nullable = false) // 수량
@@ -24,12 +24,12 @@ data class OrderEntity(
     @Column(name = "order_state")
     val orderState: OrderState,
     @OneToOne
-    @JoinColumn(name = "product_id", columnDefinition = "CHAR(16)")
+    @JoinColumn(name = "product_id")
     val productId: ProductEntity, // 제품
     @OneToOne
-    @JoinColumn(name = "franchise_id", columnDefinition = "CHAR(16)")
+    @JoinColumn(name = "franchise_id")
     val franchiseId: FranchiseEntity, // 가맹점
     @OneToOne
-    @JoinColumn(name = "franchisor_id", columnDefinition = "CHAR(16)")
+    @JoinColumn(name = "franchisor_id")
     val franchisorId: FranchisorEntity // 본사
 )

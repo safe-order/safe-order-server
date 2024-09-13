@@ -8,12 +8,12 @@ import kr.yz.safeorder.domain.product.ProductEntity
 @Table(name = "shopping_cart")
 data class ShoppingCartEntity(
     @Id
-    @Column(columnDefinition = "CHAR(16)")
-    val id: String,
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    val id: Long, // 아이디
     @OneToOne
-    @JoinColumn(name = "product_id", columnDefinition = "CHAR(16)")
+    @JoinColumn(name = "product_id")
     val product: ProductEntity,
     @OneToOne
-    @JoinColumn(name = "franchise", columnDefinition = "CHAR(16)")
+    @JoinColumn(name = "franchise")
     val franchise: FranchiseEntity
 )

@@ -14,7 +14,7 @@ class CustomFranchiseDetailsService(
 ) : UserDetailsService {
     override fun loadUserByUsername(userId: String): UserDetails {
         val user = franchiseRepository.findByIdOrNull(userId) ?: throw InvalidTokenException
-        return CustomFranchiseDetails(user.id, Authority.CLIENT)
+        return CustomFranchiseDetails(user.id.toString(), Authority.CLIENT)
     }
 
 }

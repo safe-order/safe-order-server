@@ -9,8 +9,8 @@ import java.time.LocalDateTime
 @Table(name = "franchisor")
 data class FranchisorEntity(
     @Id
-    @Column(columnDefinition = "CHAR(16)")
-    val id: String, // 아이디
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    val id: Long, // 아이디
     @Column(name = "username", unique = true, columnDefinition = "VARCHAR(12)")
     val username: String, // 유저 아이디
     @Column(name = "password", nullable = false, columnDefinition = "VARCHAR(50)")

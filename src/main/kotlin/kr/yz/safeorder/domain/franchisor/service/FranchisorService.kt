@@ -31,12 +31,12 @@ class FranchisorService(
     fun login(username: String, password: String): TokenDto {
         val adminData = franchisorRepository.findByUsername(username) ?: throw TODO("존재 하지 않는 username")
         matchesPassword(password, adminData.password)
-        return jwtProvider.receiveToken(adminData.id, Authority.ADMIN)
+        return jwtProvider.receiveToken(adminData.id.toString(), Authority.ADMIN)
     }
 
     fun signup(signupDto: FranchisorSignupDto): StatusDto {
         val franchisorData = FranchisorEntity(
-            id = NanoId.generate(16),
+            id = 0,
             username = signupDto.username,
             password = signupDto.password,
             createdAt = LocalDateTime.now(),

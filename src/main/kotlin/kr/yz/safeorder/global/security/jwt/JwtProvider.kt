@@ -33,7 +33,7 @@ class JwtProvider(
     )
 
     private fun generateJwtAccessToken(id: String, authority: Authority) =
-        Jwts.builder().signWith(accessKey, SignatureAlgorithm.HS256).setHeaderParam(Header.JWT_TYPE, ACCESS).setId(id)
+        Jwts.builder().signWith(accessKey, SignatureAlgorithm.HS256).setHeaderParam(Header.JWT_TYPE, ACCESS).setId(id.toString())
             .claim(AUTHORITY, authority).setIssuedAt(Date())
             .setExpiration(Date(System.currentTimeMillis() + jwtProperties.accessExp * 1000)).compact()
 

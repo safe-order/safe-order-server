@@ -14,7 +14,7 @@ class CustomSupplierDetailsService(
 ) : UserDetailsService {
     override fun loadUserByUsername(userId: String): UserDetails {
         val user = supplierRepository.findByIdOrNull(userId) ?: throw InvalidTokenException
-        return CustomSupplierDetails(user.id, Authority.SUPPLIER)
+        return CustomSupplierDetails(user.id.toString(), Authority.SUPPLIER)
     }
 
 }

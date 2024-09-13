@@ -14,7 +14,7 @@ class CustomAdminDetailsService(
 ) : UserDetailsService {
     override fun loadUserByUsername(userId: String): UserDetails {
         val user = adminRepository.findByIdOrNull(userId) ?: throw InvalidTokenException
-        return CustomAdminDetails(user.id, Authority.ADMIN)
+        return CustomAdminDetails(user.id.toString(), Authority.ADMIN)
     }
 
 }

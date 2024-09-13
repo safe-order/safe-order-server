@@ -7,13 +7,13 @@ import kr.yz.safeorder.domain.franchisor.FranchisorEntity
 @Table(name = "franchisor_enroll")
 data class FranchisorEnrollEntity(
     @Id
-    @Column(columnDefinition = "CHAR(16)")
-    val id: String,
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    val id: Long, // 아이디
     @Column(name = "state", columnDefinition = "BOOL")
     var state: Boolean = false,
     @Column(name = "created_at",columnDefinition = "DATETIME")
     val createdAt: String,
     @OneToOne
-    @JoinColumn(name = "franchisor_id", columnDefinition = "CHAR(16)")
+    @JoinColumn(name = "franchisor_id")
     val franchisorId: FranchisorEntity
 )

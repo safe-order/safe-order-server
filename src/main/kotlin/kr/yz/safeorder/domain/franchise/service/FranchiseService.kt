@@ -18,7 +18,7 @@ class FranchiseService(
     fun login(username: String, password: String): TokenDto {
         val adminData = franchiseRepository.findByUsername(username) ?: throw TODO("존재 하지 않는 username")
         matchesPassword(password, adminData.password)
-        return jwtProvider.receiveToken(adminData.id, Authority.ADMIN)
+        return jwtProvider.receiveToken(adminData.id.toString(), Authority.ADMIN)
     }
 
     fun signup(signupDto: ClientSignupDto): StatusDto {

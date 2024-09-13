@@ -7,8 +7,8 @@ import kr.yz.safeorder.domain.supplier.SupplierEntity
 @Table(name = "product")
 data class ProductEntity(
     @Id
-    @Column(columnDefinition = "CHAR(16)")
-    val id: String,
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    val id: Long, // 아이디
     @Column(name = "name", nullable = false, columnDefinition = "VARCHAR(50)") // 이름
     val name: String,
     @Column(name = "retail_price", nullable = false) // 소매가
@@ -26,6 +26,6 @@ data class ProductEntity(
     @Column(name = "tex", nullable = false) // 사진 URL
     val tex: Int,
     @OneToOne
-    @JoinColumn(name = "supplier_id", columnDefinition = "CHAR(16)")
+    @JoinColumn(name = "supplier_id")
     val supplierId: SupplierEntity
 )

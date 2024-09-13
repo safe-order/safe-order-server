@@ -27,7 +27,7 @@ class AdminService(
     fun login(userSignupDto: AdminDto): TokenDto {
         val adminData = adminRepository.findByUsername(userSignupDto.username) ?: throw TODO("존재 하지 않는 username")
         matchesPassword(userSignupDto.password, adminData.password)
-        return jwtProvider.receiveToken(adminData.id, Authority.ADMIN)
+        return jwtProvider.receiveToken(adminData.id.toString(), Authority.ADMIN)
     }
 
     fun signup(userSignupDto: AdminDto): StatusDto {
@@ -35,7 +35,7 @@ class AdminService(
         if (adminRepository.existsByUsername(userSignupDto.username)) throw TODO("이미 존재하는 유저 아이디")
 
         val admin = AdminEntity(
-            id = NanoId.generate(16),
+            id = 0,
             username = userSignupDto.username,
             password = userSignupDto.password
         )
