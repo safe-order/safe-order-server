@@ -5,7 +5,7 @@ import io.jsonwebtoken.security.Keys
 import kr.yz.safeorder.global.error.exception.*
 import kr.yz.safeorder.global.security.principle.admin.CustomAdminDetailsService
 import kr.yz.safeorder.global.security.principle.franchise.CustomFranchiseDetailsService
-import kr.yz.safeorder.global.security.principle.headquarters.CustomFranchisorDetailsService
+import kr.yz.safeorder.global.security.principle.headquarters.CustomHeadquartersDetailsService
 import kr.yz.safeorder.global.security.principle.supplier.CustomSupplierDetailsService
 import kr.yz.safeorder.global.type.Authority
 import kr.yz.safeorder.global.type.Token
@@ -20,7 +20,7 @@ class JwtParser(
     private val jwtProperties: JwtProperties,
     private val adminDetailsService: CustomAdminDetailsService,
     private val clientDetailsService: CustomFranchiseDetailsService,
-    private val headQuartersDetails: CustomFranchisorDetailsService,
+    private val headQuartersDetails: CustomHeadquartersDetailsService,
     private val supplierDetailsService: CustomSupplierDetailsService,
 ) {
 

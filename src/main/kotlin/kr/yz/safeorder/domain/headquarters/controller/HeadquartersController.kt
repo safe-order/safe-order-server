@@ -1,18 +1,18 @@
-package kr.yz.safeorder.domain.franchisor.controller
+package kr.yz.safeorder.domain.headquarters.controller
 
 import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.responses.ApiResponse
 import io.swagger.v3.oas.annotations.tags.Tag
 import kr.yz.safeorder.domain.certification.dto.response.CheckValidVerifyCodeResponseDto
 import kr.yz.safeorder.domain.certification.service.CertificationService
-import kr.yz.safeorder.domain.franchisor.controller.dto.FranchiseEnrollDto
-import kr.yz.safeorder.domain.franchisor.controller.dto.SupplierEnrollDto
-import kr.yz.safeorder.domain.franchisor.controller.dto.FranchisorSignupDto
-import kr.yz.safeorder.domain.franchisor.service.FranchisorService
+import kr.yz.safeorder.domain.headquarters.controller.dto.FranchiseEnrollDto
+import kr.yz.safeorder.domain.headquarters.controller.dto.SupplierEnrollDto
+import kr.yz.safeorder.domain.headquarters.controller.dto.HeadquartersSignupDto
+import kr.yz.safeorder.domain.headquarters.service.HeadquartersService
 import kr.yz.safeorder.global.dto.StatusDto
 import kr.yz.safeorder.global.dto.TokenDto
 import kr.yz.safeorder.global.error.exception.ExistUserIdException
-import kr.yz.safeorder.global.security.principle.headquarters.CustomFranchisorDetails
+import kr.yz.safeorder.global.security.principle.headquarters.CustomHeadquartersDetails
 import org.springframework.data.domain.Slice
 import org.springframework.http.HttpStatus
 import org.springframework.security.core.annotation.AuthenticationPrincipal
@@ -20,9 +20,9 @@ import org.springframework.web.bind.annotation.*
 
 @Tag(name = "user", description = "로그인, 회원가입 api")
 @RestController
-@RequestMapping("/api/franchisor")
-class FranchisorController(
-    private val franchisorService: FranchisorService, private val certificationService: CertificationService
+@RequestMapping("/api/headquarters")
+class HeadquartersController(
+    private val headquartersService: HeadquartersService, private val certificationService: CertificationService
 ) {
 
     @Operation(
@@ -33,7 +33,7 @@ class FranchisorController(
     )
     @PostMapping("/login")
     fun login(@RequestParam("username") username: String, @RequestParam("password") password: String): TokenDto {
-        return franchisorService.login(username, password)
+        return headquartersService.login(username, password)
     }
 
     @Operation(
@@ -44,10 +44,10 @@ class FranchisorController(
     )
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/signup")
-    fun signup(@RequestBody franchisorSignupDto: FranchisorSignupDto): StatusDto {
-        franchisorService.checkValidUsername(franchisorSignupDto.username)
-        certificationService.checkValidBusinessNumberToken(franchisorSignupDto.businessNumberToken, franchisorSignupDto.businessNumber)
-        return franchisorService.signup(franchisorSignupDto)
+    fun signup(@RequestBody headquartersSignupDto: HeadquartersSignupDto): StatusDto {
+        headquartersService.checkValidUsername(headquartersSignupDto.username)
+        certificationService.checkValidBusinessNumberToken(headquartersSignupDto.businessNumberToken, headquartersSignupDto.businessNumber)
+        return headquartersService.signup(headquartersSignupDto)
     }
 
     @Operation(
@@ -59,7 +59,7 @@ class FranchisorController(
     @ResponseStatus(HttpStatus.OK)
     @GetMapping("/valid-username")
     fun validUsername(@RequestParam username: String): StatusDto {
-        if (franchisorService.checkValidUsername(username)) {
+        if (headquartersService.checkValidUsername(username)) {
             return StatusDto("Ok", 200)
         }
         throw ExistUserIdException
@@ -74,7 +74,7 @@ class FranchisorController(
     @ResponseStatus(HttpStatus.OK)
     @GetMapping("/valid-business-number")
     fun validBusinessNumber(@RequestParam("business-number") businessNumber: String): CheckValidVerifyCodeResponseDto {
-        if (franchisorService.checkValidBusinessNumber(businessNumber)) {
+        if (headquartersService.checkValidBusinessNumber(businessNumber)) {
             return certificationService.checkValidBusinessNumber(businessNumber)
         }
         throw ExistUserIdException
@@ -87,8 +87,8 @@ class FranchisorController(
         responseCode = "200", description = "가맹점 승인됨"
     )
     @PostMapping("/approval-franchise-enroll")
-    fun approvalFranchiseEnroll(@RequestParam("franchise-enroll-id") franchiseEnrollId: String, @AuthenticationPrincipal auth: CustomFranchisorDetails): StatusDto {
-        return franchisorService.approvalFranchiseEnroll(franchiseEnrollId)
+    fun approvalFranchiseEnroll(@RequestParam("franchise-enroll-id") franchiseEnrollId: String, @AuthenticationPrincipal auth: CustomHeadquartersDetails): StatusDto {
+        return headquartersService.approvalFranchiseEnroll(franchiseEnrollId)
     }
 
     @Operation(
@@ -99,7 +99,7 @@ class FranchisorController(
     )
     @PostMapping("/approval-supplier-enroll")
     fun approvalSupplierEnroll(@RequestParam("franchise-enroll-id") franchiseEnrollId: String): StatusDto {
-        return franchisorService.approvalSupplierEnroll(franchiseEnrollId)
+        return headquartersService.approvalSupplierEnroll(franchiseEnrollId)
     }
 
     @Operation(
@@ -110,7 +110,7 @@ class FranchisorController(
     )
     @GetMapping("/supplier-enroll-list")
     fun supplierList(@RequestParam page: Int, @RequestParam size: Int): Slice<SupplierEnrollDto> {
-        return franchisorService.supplierEnrollList(page, size)
+        return headquartersService.supplierEnrollList(page, size)
     }
 
     @Operation(
@@ -121,7 +121,7 @@ class FranchisorController(
     )
     @GetMapping("/franchise-enroll-list")
     fun franchiseList(@RequestParam page: Int, @RequestParam size: Int): Slice<FranchiseEnrollDto> {
-        return franchisorService.franchiseEnrollList(page, size)
+        return headquartersService.franchiseEnrollList(page, size)
     }
 
 }

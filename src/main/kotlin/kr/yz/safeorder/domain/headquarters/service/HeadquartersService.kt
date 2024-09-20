@@ -1,14 +1,13 @@
-package kr.yz.safeorder.domain.franchisor.service
+package kr.yz.safeorder.domain.headquarters.service
 
-import io.viascom.nanoid.NanoId
-import kr.yz.safeorder.domain.franchisor.FranchisorEntity
-import kr.yz.safeorder.domain.franchisor.controller.dto.FranchiseEnrollDto
-import kr.yz.safeorder.domain.franchisor.controller.dto.SupplierEnrollDto
-import kr.yz.safeorder.domain.franchisor.controller.dto.FranchisorSignupDto
-import kr.yz.safeorder.domain.franchisor.controller.dto.toDto
-import kr.yz.safeorder.domain.franchisor.repository.FranchiseEnrollRepository
-import kr.yz.safeorder.domain.franchisor.repository.FranchisorRepository
-import kr.yz.safeorder.domain.franchisor.repository.SupplierEnrollRepository
+import kr.yz.safeorder.domain.headquarters.entity.HeadquartersEntity
+import kr.yz.safeorder.domain.headquarters.controller.dto.FranchiseEnrollDto
+import kr.yz.safeorder.domain.headquarters.controller.dto.SupplierEnrollDto
+import kr.yz.safeorder.domain.headquarters.controller.dto.HeadquartersSignupDto
+import kr.yz.safeorder.domain.headquarters.controller.dto.toDto
+import kr.yz.safeorder.domain.headquarters.repository.FranchiseEnrollRepository
+import kr.yz.safeorder.domain.headquarters.repository.HeadquartersRepository
+import kr.yz.safeorder.domain.headquarters.repository.SupplierEnrollRepository
 import kr.yz.safeorder.global.dto.StatusDto
 import kr.yz.safeorder.global.dto.TokenDto
 import kr.yz.safeorder.global.security.jwt.JwtProvider
@@ -21,21 +20,21 @@ import org.springframework.stereotype.Service
 import java.time.LocalDateTime
 
 @Service
-class FranchisorService(
-    private val franchisorRepository: FranchisorRepository,
+class HeadquartersService(
+    private val headquartersRepository: HeadquartersRepository,
     private val franchiseEnrollRepository: FranchiseEnrollRepository,
     private val supplierEnrollRepository: SupplierEnrollRepository,
     private val passwordEncoder: BCryptPasswordEncoder,
     private val jwtProvider: JwtProvider
 ) {
     fun login(username: String, password: String): TokenDto {
-        val adminData = franchisorRepository.findByUsername(username) ?: throw TODO("존재 하지 않는 username")
+        val adminData = headquartersRepository.findByUsername(username) ?: throw TODO("존재 하지 않는 username")
         matchesPassword(password, adminData.password)
         return jwtProvider.receiveToken(adminData.id.toString(), Authority.ADMIN)
     }
 
-    fun signup(signupDto: FranchisorSignupDto): StatusDto {
-        val franchisorData = FranchisorEntity(
+    fun signup(signupDto: HeadquartersSignupDto): StatusDto {
+        val headquartersData = HeadquartersEntity(
             id = 0,
             username = signupDto.username,
             password = signupDto.password,
@@ -48,8 +47,8 @@ class FranchisorService(
             businessRegistrationUrl = ""
         )
 
-        franchisorData.hashPassword(passwordEncoder)
-        franchisorRepository.save(franchisorData)
+        headquartersData.hashPassword(passwordEncoder)
+        headquartersRepository.save(headquartersData)
         return StatusDto("Created", 201)
     }
 
@@ -96,11 +95,11 @@ class FranchisorService(
     }
 
     fun checkValidUsername(username: String): Boolean {
-        return franchisorRepository.existsByUsername(username)
+        return headquartersRepository.existsByUsername(username)
     }
 
     fun checkValidBusinessNumber(businessNumber: String): Boolean {
-        return franchisorRepository.existsByBusinessNumber(businessNumber)
+        return headquartersRepository.existsByBusinessNumber(businessNumber)
     }
 
     private fun matchesPassword(password: String, sparePassword: String) {

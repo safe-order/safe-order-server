@@ -1,11 +1,11 @@
 package kr.yz.safeorder.domain.admin
 
 import jakarta.persistence.*
-import kr.yz.safeorder.domain.franchisor.FranchisorEntity
+import kr.yz.safeorder.domain.headquarters.entity.HeadquartersEntity
 
 @Entity
-@Table(name = "franchisor_enroll")
-data class FranchisorEnrollEntity(
+@Table(name = "headquarters_enroll")
+data class HeadquartersEnrollEntity(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long, // 아이디
@@ -14,6 +14,6 @@ data class FranchisorEnrollEntity(
     @Column(name = "created_at",columnDefinition = "DATETIME")
     val createdAt: String,
     @OneToOne
-    @JoinColumn(name = "franchisor_id")
-    val franchisorId: FranchisorEntity
+    @JoinColumn(name = "headquarters_id")
+    val headquartersId: HeadquartersEntity
 )

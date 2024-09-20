@@ -1,6 +1,6 @@
-package kr.yz.safeorder.domain.franchisor.repository
+package kr.yz.safeorder.domain.headquarters.repository
 
-import kr.yz.safeorder.domain.franchisor.FranchiseEnrollEntity
+import kr.yz.safeorder.domain.headquarters.entity.FranchiseEnrollEntity
 import org.springframework.data.domain.Pageable
 import org.springframework.data.domain.Slice
 import org.springframework.data.jpa.repository.Query

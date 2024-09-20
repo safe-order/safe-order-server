@@ -1,4 +1,4 @@
-package kr.yz.safeorder.domain.franchisor
+package kr.yz.safeorder.domain.headquarters.entity
 
 import jakarta.persistence.*
 import org.springframework.security.crypto.password.PasswordEncoder
@@ -6,8 +6,8 @@ import java.time.LocalDateTime
 
 // 본사
 @Entity
-@Table(name = "franchisor")
-data class FranchisorEntity(
+@Table(name = "headquarters")
+data class HeadquartersEntity(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long, // 아이디

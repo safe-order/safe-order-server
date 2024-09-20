@@ -6,7 +6,7 @@ import io.swagger.v3.oas.annotations.tags.Tag
 import jakarta.validation.Valid
 import kr.yz.safeorder.domain.admin.controller.dto.AdminDto
 import kr.yz.safeorder.domain.admin.service.AdminService
-import kr.yz.safeorder.domain.admin.controller.dto.FranchisorEnrollDto
+import kr.yz.safeorder.domain.admin.controller.dto.HeadquartersEnrollDto
 import kr.yz.safeorder.global.dto.StatusDto
 import kr.yz.safeorder.global.dto.TokenDto
 import org.springframework.data.domain.Slice
@@ -55,9 +55,9 @@ class AdminController(
         responseCode = "200",
         description = "본사 승인 됨"
     )
-    @PatchMapping("/approval-franchisor-enroll")
-    fun approval(@RequestParam("franchisor-enroll-id") franchisorEnrollId: String): StatusDto {
-        return adminService.approvalFranchisorEnroll(franchisorEnrollId)
+    @PatchMapping("/approval-headquarters-enroll")
+    fun approval(@RequestParam("headquarters-enroll-id") headquartersEnrollId: String): StatusDto {
+        return adminService.approvalHeadquartersEnroll(headquartersEnrollId)
     }
 
     @Operation(
@@ -68,9 +68,9 @@ class AdminController(
         responseCode = "200",
         description = "본사 거절 됨"
     )
-    @DeleteMapping("/refusal-franchisor-enroll")
-    fun refusal(@RequestParam("franchisor-enroll-id") franchisorEnrollId: String): StatusDto {
-        return adminService.refusalFranchisorEnroll(franchisorEnrollId)
+    @DeleteMapping("/refusal-headquarters-enroll")
+    fun refusal(@RequestParam("headquarters-enroll-id") headquartersEnrollId: String): StatusDto {
+        return adminService.refusalHeadquartersEnroll(headquartersEnrollId)
     }
 
     @Operation(
@@ -81,9 +81,9 @@ class AdminController(
         responseCode = "200",
         description = "본사 가입 리스트"
     )
-    @GetMapping("/franchisor-enroll-list")
-    fun getFranchisorEnrollList(@RequestParam page: Int, @RequestParam size: Int): Slice<FranchisorEnrollDto> {
-        return adminService.getFranchisorEnrollList(page, size)
+    @GetMapping("/headquarters-enroll-list")
+    fun getHeadquartersEnrollList(@RequestParam page: Int, @RequestParam size: Int): Slice<HeadquartersEnrollDto> {
+        return adminService.getHeadquartersEnrollList(page, size)
     }
 
 }

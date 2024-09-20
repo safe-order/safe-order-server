@@ -2,7 +2,7 @@ package kr.yz.safeorder.domain.order
 
 import jakarta.persistence.*
 import kr.yz.safeorder.domain.franchise.FranchiseEntity
-import kr.yz.safeorder.domain.franchisor.FranchisorEntity
+import kr.yz.safeorder.domain.headquarters.entity.HeadquartersEntity
 import kr.yz.safeorder.domain.order.type.OrderState
 import kr.yz.safeorder.domain.product.ProductEntity
 
@@ -30,6 +30,6 @@ data class OrderEntity(
     @JoinColumn(name = "franchise_id")
     val franchiseId: FranchiseEntity, // 가맹점
     @OneToOne
-    @JoinColumn(name = "franchisor_id")
-    val franchisorId: FranchisorEntity // 본사
+    @JoinColumn(name = "headquarters_id")
+    val headquartersId: HeadquartersEntity // 본사
 )

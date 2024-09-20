@@ -1,12 +1,11 @@
 package kr.yz.safeorder.domain.admin.service
 
-import io.viascom.nanoid.NanoId
 import kr.yz.safeorder.domain.admin.AdminEntity
 import kr.yz.safeorder.domain.admin.controller.dto.AdminDto
 import kr.yz.safeorder.domain.admin.repository.AdminRepository
-import kr.yz.safeorder.domain.admin.controller.dto.FranchisorEnrollDto
+import kr.yz.safeorder.domain.admin.controller.dto.HeadquartersEnrollDto
 import kr.yz.safeorder.domain.admin.controller.dto.toDto
-import kr.yz.safeorder.domain.admin.repository.FranchisorEnrollRepository
+import kr.yz.safeorder.domain.admin.repository.HeadquartersEnrollRepository
 import kr.yz.safeorder.global.dto.StatusDto
 import kr.yz.safeorder.global.dto.TokenDto
 import kr.yz.safeorder.global.security.jwt.JwtProvider
@@ -20,7 +19,7 @@ import org.springframework.stereotype.Service
 @Service
 class AdminService(
     private val adminRepository: AdminRepository,
-    private val franchisorEnrollRepository: FranchisorEnrollRepository,
+    private val headquartersEnrollRepository: HeadquartersEnrollRepository,
     private val passwordEncoder: BCryptPasswordEncoder,
     private val jwtProvider: JwtProvider
 ) {
@@ -45,31 +44,31 @@ class AdminService(
         return StatusDto("Created", 201)
     }
 
-    fun approvalFranchisorEnroll(franchisorEnrollId: String): StatusDto {
-        val franchisorEnroll = franchisorEnrollRepository.findById(franchisorEnrollId).orElseThrow {
-            throw TODO("존재 하지 않는 franchisorEnrollId")
+    fun approvalHeadquartersEnroll(headquartersEnrollId: String): StatusDto {
+        val headquartersEnroll = headquartersEnrollRepository.findById(headquartersEnrollId).orElseThrow {
+            throw TODO("존재 하지 않는 headquartersEnrollId")
         }
-        franchisorEnroll.state = true
-        franchisorEnrollRepository.save(franchisorEnroll)
+        headquartersEnroll.state = true
+        headquartersEnrollRepository.save(headquartersEnroll)
         return StatusDto("Ok", 200)
     }
 
-    fun refusalFranchisorEnroll(franchisorEnrollId: String): StatusDto {
-        val franchisorEnroll = franchisorEnrollRepository.findById(franchisorEnrollId).orElseThrow {
-            throw TODO("존재 하지 않는 franchisorEnrollId")
+    fun refusalHeadquartersEnroll(headquartersEnrollId: String): StatusDto {
+        val headquartersEnroll = headquartersEnrollRepository.findById(headquartersEnrollId).orElseThrow {
+            throw TODO("존재 하지 않는 headquartersEnrollId")
         }
-        franchisorEnrollRepository.delete(franchisorEnroll)
+        headquartersEnrollRepository.delete(headquartersEnroll)
         return StatusDto("Ok", 200)
     }
 
-    fun getFranchisorEnrollList(page: Int, size: Int): Slice<FranchisorEnrollDto> {
+    fun getHeadquartersEnrollList(page: Int, size: Int): Slice<HeadquartersEnrollDto> {
         val pageRequest = PageRequest.of(
             page, size, Sort.by(
                 Sort.Direction.DESC, "created_at"
             )
         )
-        val franchisorData = franchisorEnrollRepository.findSliceBy(pageRequest) ?: throw TODO("신청된 본사 없음")
-        return franchisorData.toDto()
+        val headquartersData = headquartersEnrollRepository.findSliceBy(pageRequest) ?: throw TODO("신청된 본사 없음")
+        return headquartersData.toDto()
     }
 
     private fun matchesPassword(password: String, sparePassword: String) {

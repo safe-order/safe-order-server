@@ -1,9 +1,9 @@
-package kr.yz.safeorder.domain.franchisor.controller.dto
+package kr.yz.safeorder.domain.headquarters.controller.dto
 
 import jakarta.validation.constraints.NotBlank
 import jakarta.validation.constraints.Pattern
 
-data class FranchisorSignupDto(
+data class HeadquartersSignupDto(
     @field:NotBlank(message = "아이디는 필수 입력 값입니다.")
     @field:Pattern(
         regexp = "^[a-zA-Z0-9]{4,12}$",
